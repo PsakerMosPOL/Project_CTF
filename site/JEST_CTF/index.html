@@ -1,0 +1,123 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JESTь | CTF Web Challenges</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>JESTь</h1>
+        <p>Создание мини-набора CTF-задач по безопасности веб-приложений</p>
+        <?php
+        session_start();
+        if (isset($_SESSION['username'])) {
+            echo '<p>Добро пожаловать, ' . htmlspecialchars($_SESSION['username']) . '! <a href="php/dashboard.php">Личный кабинет</a> | <a href="php/logout.php">Выйти</a></p>';
+        } else {
+            echo '<p><a href="php/login.php">Войти</a> | <a href="php/register.php">Зарегистрироваться</a></p>';
+        }
+        ?>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#about">О нас</a></li>
+            <li><a href="#tasks">Задачи</a></li>
+            <li><a href="#team">Команда</a></li>
+            <li><a href="#contact">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="section" id="about">
+            <h2>Кто мы?</h2>
+            <p>Мы - CyberSmiths, команда из двух студентов (группы 241-371 и 241-352), создающая захватывающие CTF-задачи по безопасности веб-приложений. Наша цель - бросить вызов хакерам и помочь им отточить навыки в поиске уязвимостей. Готовы взломать наши задачи?</p>
+        </div>
+
+        <div class="section" id="tasks">
+            <h2>Наши CTF-задачи</h2>
+            <ul class="task-list">
+                <li><a href="xss-playground.html">XSS Playground</a> - Экспериментируйте с межсайтовым скриптингом</li>
+                <li><a href="sql-injector.html">SQL Injector</a> - Погрузитесь в уязвимости SQL-инъекций</li>
+                <li><a href="auth-buster.html">AuthBuster</a> - Ломайте слабые механизмы аутентификации</li>
+                <li><a href="file-hunter.html">FileHunter</a> - Отыщите скрытые файлы на сервере</li>
+                <li><a href="csrf-trap.html">CSRF Trap</a> - Поймайте уязвимость CSRF</li>
+                <li><a href="idor-leak.html">IDOR Leak</a> - Найдите данные других пользователей</li>
+            </ul>
+        </div>
+
+        <div class="section" id="team">
+            <h2>Наша команда</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="Александр Панов">
+                    <h3>Панов Александр</h3>
+                    <p>Веб-гуру & мастер XSS</p>
+                    <p>Группа: 241-371</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="Марат Мустафин">
+                    <h3>Мустафин Марат</h3>
+                    <p>Специалист по SQL-инъекциям</p>
+                    <p>Группа: 241-352</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="contact">
+            <h2>Связаться с нами</h2>
+            <div class="contact-links">
+                <p>Telegram: <a href="https://t.me/WHTeplo">@WHTeplo</a></p>
+                <p>Telegram: <a href="https://t.me/psayker77">@psayker77</a></p>
+                <p>GitHub: <a href="https://github.com/PsakerMosPOL/Project_CTF/tree/main">github.com/PsakerMosPO</a></p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 JESTь. Взламывайте с умом!</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

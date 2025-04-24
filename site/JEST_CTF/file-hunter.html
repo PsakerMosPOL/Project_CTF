@@ -1,0 +1,101 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileHunter | JESTь</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>FileHunter</h1>
+        <p>Отыщите скрытые файлы на сервере!</p>
+    </header>
+
+    <div class="container">
+        <p>Введите путь к файлу для просмотра:</p>
+        <input type="text" id="file-path" placeholder="Попробуйте /secret/flag.txt">
+        <br>
+        <button onclick="accessFile()">Открыть</button>
+        <button onclick="showHint()" class="hint-button">Подсказка</button>
+
+        <div class="hint" id="hint" style="display: none;">
+            <p>Попробуйте найти скрытые директории или файлы, например, <code>/secret/flag.txt</code>. Подумайте, где могут храниться важные данные!</p>
+        </div>
+
+        <div class="output">
+            <h2>Содержимое файла:</h2>
+            <div id="output"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 JESTь. Создано Пановым Александром и Мустафиным Маратом.</p>
+    </footer>
+
+    <script>
+        function accessFile() {
+            const filePath = document.getElementById('file-path').value;
+            const outputDiv = document.getElementById('output');
+
+            const files = {
+                '/index.html': '<p>Это главная страница сайта.</p>',
+                '/about.html': '<p>Информация о нас.</p>',
+                '/secret/flag.txt': '<p class="success">Флаг: JEST_FILE_FLAG_2025</p>'
+            };
+
+            if (filePath in files) {
+                outputDiv.innerHTML = files[filePath];
+            } else if (filePath.trim() === '') {
+                outputDiv.innerHTML = '<p class="error">Введите путь к файлу.</p>';
+            } else {
+                outputDiv.innerHTML = '<p class="error">Файл не найден.</p>';
+            }
+        }
+
+        function showHint() {
+            const hintDiv = document.getElementById('hint');
+            hintDiv.style.display = hintDiv.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>
