@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuthBuster | JESTь</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>AuthBuster</h1>
+        <p>Ломайте слабые механизмы аутентификации!</p>
+    </header>
+
+    <div class="container">
+        <p>Войдите в систему, используя логин и пароль:</p>
+        <input type="text" id="username" placeholder="Логин (попробуйте admin)">
+        <input type="password" id="password" placeholder="Пароль (попробуйте admin123)">
+        <br>
+        <button onclick="login()">Войти</button>
+
+        <div class="output">
+            <h2>Результат:</h2>
+            <div id="output"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 JESTь. Создано Пановым Александром и Мустафиным Маратом.</p>
+    </footer>
+
+    <script>
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const outputDiv = document.getElementById('output');
+
+            if (username === 'admin' && password === 'admin123') {
+                outputDiv.innerHTML = '<p class="success">Успех! Вы вошли как администратор. Флаг: JEST_AUTH_FLAG_2025</p>';
+            } else if (username.trim() === '' || password.trim() === '') {
+                outputDiv.innerHTML = '<p class="error">Заполните все поля.</p>';
+            } else {
+                outputDiv.innerHTML = '<p class="error">Неверный логин или пароль.</p>';
+            }
+        }
+    </script>
+</body>
+</html>

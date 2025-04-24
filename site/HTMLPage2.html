@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Injector | JESTь</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>SQL Injector</h1>
+        <p>Погрузитесь в уязвимости SQL-инъекций!</p>
+    </header>
+
+    <div class="container">
+        <p>Введите запрос для поиска пользователей в базе данных:</p>
+        <input type="text" id="search" placeholder="Попробуйте ' OR '1'='1...">
+        <br>
+        <button onclick="searchUsers()">Поиск</button>
+
+        <div class="output">
+            <h2>Результаты:</h2>
+            <div id="output"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 JESTь. Создано Пановым Александром и Мустафиным Маратом.</p>
+    </footer>
+
+    <script>
+        const users = [
+            { id: 1, username: 'admin', email: 'admin@jest.ru' },
+            { id: 2, username: 'user1', email: 'user1@jest.ru' },
+            { id: 3, username: 'user2', email: 'user2@jest.ru' }
+        ];
+
+        function searchUsers() {
+            const searchInput = document.getElementById('search').value;
+            const outputDiv = document.getElementById('output');
+
+            if (searchInput.includes("' OR '1'='1")) {
+                let result = '<h3>Найдены пользователи:</h3><ul>';
+                users.forEach(user => {
+                    result += `<li>ID: ${user.id}, Username: ${user.username}, Email: ${user.email}</li>`;
+                });
+                result += '</ul>';
+                outputDiv.innerHTML = result;
+            } else if (searchInput.trim() === '') {
+                outputDiv.innerHTML = '<p>Введите запрос для поиска.</p>';
+            } else {
+                const filteredUsers = users.filter(user => user.username.includes(searchInput));
+                if (filteredUsers.length > 0) {
+                    let result = '<h3>Найдены пользователи:</h3><ul>';
+                    filteredUsers.forEach(user => {
+                        result += `<li>ID: ${user.id}, Username: ${user.username}, Email: ${user.email}</li>`;
+                    });
+                    result += '</ul>';
+                    outputDiv.innerHTML = result;
+                } else {
+                    outputDiv.innerHTML = '<p>Пользователи не найдены.</p>';
+                }
+            }
+        }
+    </script>
+</body>
+</html>

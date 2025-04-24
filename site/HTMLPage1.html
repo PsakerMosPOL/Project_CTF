@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XSS Playground | JESTь</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>XSS Playground</h1>
+        <p>Попробуйте свои силы в XSS-атаках!</p>
+    </header>
+
+    <div class="container">
+        <p>Введите текст ниже, чтобы протестировать XSS:</p>
+        <textarea id="input" placeholder="Попробуйте ввести <script>alert('XSS');</script>..."></textarea>
+        <br>
+        <button onclick="displayInput()">Взломать!</button>
+
+        <div class="output">
+            <h2>Результат:</h2>
+            <div id="output"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 JESTь. Создано Пановым Александром и Мустафиным Маратом.</p>
+    </footer>
+
+    <script>
+        function displayInput() {
+            const userInput = document.getElementById('input').value;
+            document.getElementById('output').innerHTML = userInput;
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XSS Playground | JESTь</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>XSS Playground</h1>
+        <p>Попробуйте свои силы в XSS-атаках!</p>
+    </header>
+
+    <div class="container">
+        <p>Введите текст ниже, чтобы протестировать XSS:</p>
+        <textarea id="input" placeholder="Попробуйте ввести <script>alert('XSS');</script>..."></textarea>
+        <br>
+        <button onclick="displayInput()">Взломать!</button>
+
+        <div class="output">
+            <h2>Результат:</h2>
+            <div id="output"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 JESTь. Создано Пановым Александром и Мустафиным Маратом.</p>
+    </footer>
+
+    <script>
+        function displayInput() {
+            const userInput = document.getElementById('input').value;
+            document.getElementById('output').innerHTML = userInput;
+        }
+    </script>
+</body>
+</html>
