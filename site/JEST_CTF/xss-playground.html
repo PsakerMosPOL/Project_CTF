@@ -1,43 +1,4 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -59,12 +20,22 @@
         <button onclick="showHint()" class="hint-button">Подсказка</button>
 
         <div class="hint" id="hint" style="display: none;">
-            <p>Попробуйте ввести JavaScript-код, например: <code>&lt;script&gt;alert('XSS');&lt;/script&gt;</code> или <code>&lt;img src=x onerror=alert('XSS')&gt;</code>. Если увидите всплывающее окно, вы на правильном пути!</p>
+            <p>Попробуйте ввести JavaScript-код, например: <code>&lt;script&gt;alert('XSS');&lt;/script&gt;</code> или <code>&lt;img src=x onerror=alert('XSS')&gt;</code></p>
         </div>
 
         <div class="output">
             <h2>Результат:</h2>
             <div id="output"></div>
+        </div>
+
+        <div class="flag-input-container">
+            <p>Введите флаг:</p>
+            <input type="text" id="flag-input" placeholder="Введите флаг">
+            <span id="flag-result"></span>
+            <div class="button-group">
+                <button onclick="checkFlag()">Проверить флаг</button>
+                <a href="index.html" class="main-menu-button">Главное меню</a>
+            </div>
         </div>
     </div>
 
@@ -72,21 +43,38 @@
         <p>© 2025 JESTь. Создано Пановым Александром и Мустафиным Маратом.</p>
     </footer>
 
+    <script src="scripts.js"></script>
     <script>
+        let currentFlag = '';
+
         function displayInput() {
             const userInput = document.getElementById('input').value;
             const outputDiv = document.getElementById('output');
-            outputDiv.innerHTML = userInput;
 
-            // Проверяем, содержит ли ввод JavaScript (примерная проверка)
-            if (userInput.toLowerCase().includes('script') || userInput.toLowerCase().includes('onerror')) {
-                outputDiv.innerHTML += '<p class="success">Успех! Флаг: JEST_XSS_FLAG_2025</p>';
+            if (userInput.toLowerCase().includes('script') || 
+                userInput.toLowerCase().includes('onerror')) {
+                
+                currentFlag = generateRandomFlag('XSS');
+                outputDiv.innerHTML = `<p class="success">Успех! Флаг: ${currentFlag}</p>`;
+            } else {
+                outputDiv.innerHTML = '<p class="error">Попробуйте другую XSS-атаку</p>';
             }
         }
 
-        function showHint() {
-            const hintDiv = document.getElementById('hint');
-            hintDiv.style.display = hintDiv.style.display === 'none' ? 'block' : 'none';
+        function checkFlag() {
+            const userFlag = document.getElementById('flag-input').value.trim();
+            const flagResultSpan = document.getElementById('flag-result');
+            
+            if (!currentFlag) {
+                flagResultSpan.innerHTML = '<span class="error">Сначала получите флаг!</span>';
+                return;
+            }
+            
+            if (verifyFlag(currentFlag, userFlag)) {
+                flagResultSpan.innerHTML = '<span class="success">✓ Правильный флаг!</span>';
+            } else {
+                flagResultSpan.innerHTML = '<span class="error">✗ Неправильный флаг</span>';
+            }
         }
     </script>
 </body>
