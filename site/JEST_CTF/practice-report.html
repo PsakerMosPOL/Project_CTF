@@ -1,34 +1,185 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
+     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Отчет по практике | JESTь</title>
+    <title>JESTь | CTF Web Challenges</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .report-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-        }
-        .report-container h1 {
-            font-size: 3rem;
-            color: #00ff88;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            animation: neon 1.5s ease-in-out infinite alternate;
-        }
-    </style>
+    
 </head>
 <body>
-    <div class="report-container">
-        <h1>Отчет по практике</h1>
+    <header>
+        <h1>JESTь</h1>
+        <p>Создание мини-набора CTF-задач по безопасности веб-приложений</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="https://mustafin-marat.ru/index.html#about">О нас</a></li>
+            <li><a href=https://mustafin-marat.ru/index.html#tasks">Задачи</a></li>
+            <li><a href="https://mustafin-marat.ru/index.html#team">Команда</a></li>
+            <li><a href="https://mustafin-marat.ru/index.html#contact">Контакты</a></li>
+            <li><a href="report.html">Отчет по практике</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="section">
+            <h1>Отчет по практике: JESTь</h1>
+
+            <h2>1. Общая информация о проекте</h2>
+            <h3>Название проекта</h3>
+            <p>"JESTь: Создание мини-набора CTF-задач по безопасности веб-приложений"</p>
+
+            <h3>Цели и задачи проекта</h3>
+            <p><strong>Цель:</strong> разработать обучающий веб-сайт с набором CTF-задач по выявлению уязвимостей в веб-приложениях.</p>
+            <p><strong>Задачи:</strong></p>
+            <ul>
+                <li>Разработка 6 учебных CTF-задач по основным типам веб-уязвимостей (XSS, SQLi, CSRF, IDOR, слабая аутентификация, поиск скрытых файлов).</li>
+                <li>Создание интерфейса сайта с навигацией, описанием задач, информацией о команде и контактами.</li>
+                <li>Интеграция с Telegram и GitHub.</li>
+                <li>Подготовка технического отчёта по результатам практики.</li>
+            </ul>
+
+            <h2>2. Общая характеристика деятельности организации (заказчика проекта)</h2>
+            <h3>Наименование заказчика</h3>
+            <p>ФГБОУ ВО "Московский политехнический университет", факультет "Информационные технологии".</p>
+
+            <h3>Организационная структура</h3>
+            <p>Проект выполнялся студенческой командой из двух человек:</p>
+            <ul>
+                <li><strong>Панов Александр</strong>, группа 241-371 — веб-разработка, верстка, дизайн сайта.</li>
+                <li><strong>Мустафин Марат</strong>, группа 241-352 — реализация CTF-задач, тестирование, документация.</li>
+            </ul>
+
+            <h3>Описание деятельности</h3>
+            <p>Целью практики было приобрести практические навыки в области веб-безопасности и веб-разработки. Проект предусматривал:</p>
+            <ul>
+                <li>Изучение распространённых типов веб-уязвимостей.</li>
+                <li>Разработку лабораторных задач для их исследования.</li>
+                <li>Создание демонстрационного сайта для обучения и практического применения знаний.</li>
+            </ul>
+
+            <h2>3. Описание задания по проектной практике</h2>
+            <p>Задание заключалось в следующем:</p>
+            <ul>
+                <li>Разработать простой веб-интерфейс для представления CTF-задач.</li>
+                <li>Реализовать шесть типов задач:
+                    <ul>
+                        <li>XSS Playground</li>
+                        <li>SQL Injector</li>
+                        <li>AuthBuster</li>
+                        <li>FileHunter</li>
+                        <li>CSRF Trap</li>
+                        <li>IDOR Leak</li>
+                    </ul>
+                </li>
+                <li>Документировать процесс создания задач и сайта.</li>
+                <li>Подготовить отчет по практике, включающий описание задач, достигнутых результатов и анализ эффективности реализации.</li>
+            </ul>
+
+            <h2>4. Описание достигнутых результатов по проектной практике</h2>
+            <h3>Техническая реализация</h3>
+            <p>Разработан функциональный прототип веб-сайта, который включает:</p>
+            <ul>
+                <li>Главную страницу с навигацией по разделам: "О нас", "Задачи", "Команда", "Контакты".</li>
+                <li>Интерфейс для выбора и перехода к каждой из шести CTF-задач.</li>
+                <li>Информацию о членах команды и способах связи (Telegram, GitHub).</li>
+                <li>HTML-файл отчета по практике (report.html).</li>
+            </ul>
+
+            <h3>Контентное наполнение</h3>
+            <p>Созданы описания всех задач, позволяющие пользователям понять, какие уязвимости они будут исследовать, и какими методами.</p>
+
+            <h3>Интеграция с внешними сервисами</h3>
+            <p>Реализованы ссылки на Telegram-профили участников и репозиторий проекта на GitHub, что обеспечивает прозрачность и открытость разработки.</p>
+
+            <h2>5. Описание CTF-задач</h2>
+            <p>В рамках проекта были разработаны и интегрированы следующие задачи:</p>
+
+            <h3>XSS Playground (Межсайтовый скриптинг)</h3>
+            <p><strong>Цель:</strong> научиться обнаруживать и эксплуатировать уязвимости XSS.</p>
+            <p><strong>Что реализовано:</strong> форма ввода без экранирования вывода.</p>
+            <p><strong>Учебные аспекты:</strong> типы XSS, защита через CSP и экранирование.</p>
+
+            <h3>SQL Injector (SQL-инъекции)</h3>
+            <p><strong>Цель:</strong> изучить методы взаимодействия с SQL-базами через уязвимости ввода.</p>
+            <p><strong>Что реализовано:</strong> форма авторизации без защиты от SQLi.</p>
+            <p><strong>Учебные аспекты:</strong> UNION, error-based, blind SQLi; защита через параметризованные запросы.</p>
+
+            <h3>AuthBuster (Слабая аутентификация)</h3>
+            <p><strong>Цель:</strong> исследовать слабые реализации систем аутентификации.</p>
+            <p><strong>Что реализовано:</strong> система входа без ограничений на попытки.</p>
+            <p><strong>Учебные аспекты:</strong> перебор паролей, защита через хэширование и MFA.</p>
+
+            <h3>FileHunter (Поиск скрытых файлов)</h3>
+            <p><strong>Цель:</strong> освоить методы поиска конфиденциальных файлов на сервере.</p>
+            <p><strong>Что реализовано:</strong> возможность находить robots.txt, .env и др.</p>
+            <p><strong>Учебные аспекты:</strong> использование DirBuster, настройка прав доступа.</p>
+
+            <h3>CSRF Trap (Подделка межсайтовых запросов)</h3>
+            <p><strong>Цель:</strong> понять механизм CSRF-атак и способы их предотвращения.</p>
+            <p><strong>Что реализовано:</strong> форма изменения профиля без проверки источника.</p>
+            <p><strong>Учебные аспекты:</strong> защита через токены CSRF и SameSite.</p>
+
+            <h3>IDOR Leak (Прямой несанкционированный доступ к объектам)</h3>
+            <p><strong>Цель:</strong> обнаружить уязвимости типа IDOR.</p>
+            <p><strong>Что реализовано:</strong> страница просмотра данных с изменяемым id в URL.</p>
+            <p><strong>Учебные аспекты:</strong> проверка прав доступа, indirect object references.</p>
+
+            <h2>Заключение</h2>
+            <p>В ходе проектной практики была успешно реализована цель — создание обучающего веб-ресурса с набором CTF-задач по веб-безопасности. Разработанный сайт позволяет пользователям изучать основные типы уязвимостей веб-приложений в интерактивной форме.</p>
+            <p><strong>Результаты работы:</strong></p>
+            <ul>
+                <li>Разработан пользовательский интерфейс с четкой структурой и навигацией.</li>
+                <li>Созданы описания шести CTF-задач, соответствующих современным угрозам веб-безопасности.</li>
+                <li>Установлены каналы коммуникации с командой через Telegram и GitHub.</li>
+            </ul>
+
+            <div class="section resources-section">
+                <h2>Рекомендуемые ресурсы</h2>
+                <p>Для углубленного изучения веб-безопасности и веб-разработки рекомендуем ознакомиться со следующими материалами:</p>
+                <ul>
+                    <li><a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener noreferrer">OWASP Top Ten Project</a> — стандартный документ по безопасности веб-приложений.</li>
+                    <li><a href="https://www.w3schools.com/" target="_blank" rel="noopener noreferrer">W3Schools HTML and CSS Tutorials</a> — интерактивные уроки и практика по веб-технологиям.</li>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/Security" target="_blank" rel="noopener noreferrer">MDN Web Docs: Web Security</a> — подробная информация о методах обеспечения безопасности веб-приложений.</li>
+                    <li><a href="https://docs.github.com/" target="_blank" rel="noopener noreferrer">GitHub Documentation</a> — официальная документация по работе с GitHub и Git.</li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <footer>
-        <p>© 2025 JESTь. Создано Пановым Александром и Мустафиным Маратом.</p>
+        <p>© 2025 JESTь. Создано Пановым Александром и Мустафиным Маратом. Взламывайте с умом!</p>
     </footer>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93e4e1275fc2b00d',t:'MTc0NzAwMDA5NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+    <script src="scripts.js"></script>
+    <script>
+        (function(){
+            function c(){
+                var b = a.contentDocument || a.contentWindow.document;
+                if(b){
+                    var d = b.createElement('script');
+                    d.innerHTML = "window.__CF$cv$params={r:'93e4e1275fc2b00d',t:'MTc0NzAwMDA5NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+                    b.getElementsByTagName('head')[0].appendChild(d)
+                }
+            }
+            if(document.body){
+                var a = document.createElement('iframe');
+                a.height=1; a.width=1; a.style.position='absolute'; a.style.top=0; a.style.left=0; a.style.border='none'; a.style.visibility='hidden';
+                document.body.appendChild(a);
+                if('loading' !== document.readyState) c();
+                else if(window.addEventListener) document.addEventListener('DOMContentLoaded', c);
+                else {
+                    var e = document.onreadystatechange || function(){};
+                    document.onreadystatechange = function(b){
+                        e(b);
+                        'loading' !== document.readyState && (document.onreadystatechange = e, c())
+                    }
+                }
+            }
+        })();
+    </script>
+</body>
 </html>
