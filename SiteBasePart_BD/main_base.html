@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Проект</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('section').forEach(sec => {
+        sec.classList.remove('active');
+      });
+      const sec = document.getElementById(id);
+      if (sec) sec.classList.add('active');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      function onPopState() {
+        let hash = window.location.hash.substring(1);
+        if (!hash || !document.getElementById(hash)) {
+          hash = 'home';
+        }
+        showSection(hash);
+      }
+
+      window.addEventListener('popstate', onPopState);
+
+      document.querySelectorAll('nav a, #members-list a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = link.getAttribute('href').substring(1);
+          if (!document.getElementById(target)) return;
+          showSection(target);
+          history.pushState(null, '', '#' + target);
+        });
+      });
+
+      onPopState();
+    });
+  </script>
+</head>
+<body>
+  <nav>
+    <a href="#home">Главная</a>
+    <a href="#about">О проекте</a>
+    <a href="#members">Участники</a>
+    <a href="#journal">Журнал</a>
+    <a href="#resources">Ресурсы</a>
+  </nav>
+
+  <section id="home" class="active">
+    <h1>Главная</h1>
+    <p>Разработка платформы жестовой коммуникации.</p>
+    <p>Проект направлен на создание электронной платформы, которая будет служить инструментом систематизации знаний о русском жестовом языке. Она будет способствовать эффективной коммуникации между носителями РЖЯ и другими людьми, предоставляя словарь терминов и определений как на русском языке, так и в формате жестового языка.</p>
+  </section>
+
+  <section id="about">
+    <h2>О проекте</h2>
+    <p><strong>Цель:</strong><br>
+    Ознакомление с проектом; изучение стека технологий, используемых в проекте; изучение инфраструктуры проекта и принципов его администрирования; выполнение задач; освоение оборудования 3D-лаборатории.</p>
+
+    <p><strong>Актуальность:</strong><br>
+    Более 5% населения России имеют инвалидизирующую потерю слуха. Это более 7 млн. человек. Для них жестовый язык является родным. Необходимо обеспечить их инструментами для изучения жестового языка и средствами перевода на него.</p>
+
+    <p><strong>Результат:</strong><br>
+    Выпуск новой версии системы в виде обновлённого сайта; выпуск прототипа антропоморфного робота.</p>
+  </section>
+
+  <section id="members">
+    <h2>Участники проекта</h2>
+    <ul id="members-list">
+      <li><a href="#panov">Панов Александр</a></li>
+      <li><a href="#mustafin">Мустафин Марат</a></li>
+    </ul>
+  </section>
+
+  <section id="panov">
+    <h2>Панов Александр</h2>
+    <p><strong>Должность:</strong> Системный администратор</p>
+    <p><strong>Основные задачи:</strong></p>
+    <ul>
+      <li>Поддержка инфраструктуры проекта.</li>
+      <li>Перенос сервисов и сайтов на новые хосты.</li>
+      <li>Создание виртуальных машин и LXC-контейнеров.</li>
+      <li>Настройка инфраструктуры для разработчиков и предоставление им удалённого доступа к сервисам.</li>
+      <li>Развёртывание локальной нейронной сети для внутреннего использования участниками проекта.</li>
+    </ul>
+  </section>
+
+  <section id="mustafin">
+    <h2>Мустафин Марат</h2>
+    <p><strong>Должность:</strong> Специалист по оборудованию</p>
+    <p><strong>Основные задачи:</strong></p>
+    <ul>
+      <li>Поддержка оборудования в оптимальном состоянии и ремонт.</li>
+      <li>Настройка сложных принтеров для 3D-печати.</li>
+    </ul>
+  </section>
+
+  <section id="journal">
+    <h2>Журнал проекта</h2>
+    <div class="post">
+      <p><strong>22.04.2025:</strong> Создан групповой репозиторий на GitHub на основе предоставленного шаблона.</p>
+      <p>Освоены базовые команды Git:</p>
+      <ul>
+        <li><code>git clone</code> – клонирование репозитория,</li>
+        <li><code>git commit -m "сообщение"</code> – фиксация изменений,</li>
+        <li><code>git push</code> – отправка изменений на удалённый репозиторий,</li>
+        <li><code>git branch</code> и <code>git checkout</code> – работа с ветками.</li>
+      </ul>
+    </div>
+    <div class="post">
+      <p><strong>24.04.2025:</strong> Начата работа над вариативной частью. Создан первый прототип сайта с набором CTF-задач для веб-безопасности и загружен в репозиторий на GitHub.</p>
+    </div>
+    <div class="post">
+      <p><strong>03.05.2025:</strong> Изучен синтаксис Markdown (заголовки, списки, ссылки, таблицы, изображения).</p>
+    </div>
+  </section>
+
+  <section id="resources">
+    <h2>Ресурсы для ознакомления с проектом</h2>
+    <ul>
+      <li><a href="https://cnii-jest.ru/ru/" target="_blank" rel="noopener noreferrer">ЦНИИ русского жестового языка</a></li>
+      <li><a href="https://harlamenkov.ru/" target="_blank" rel="noopener noreferrer">Личный сайт куратора проекта</a></li>
+      <li><a href="https://avatar.cnii-jest.ru/" target="_blank" rel="noopener noreferrer">Аватар — переводчик жестового языка</a></li>
+    </ul>
+  </section>
+</body>
+</html>

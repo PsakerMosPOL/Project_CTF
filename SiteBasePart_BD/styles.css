@@ -1,0 +1,61 @@
+/* Общие стили */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f0f2f5;
+  color: #1c1e21;
+}
+
+/* Навигационное меню */
+nav {
+  background-color: #1877f2;
+  padding: 12px 20px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #dfe3ee;
+}
+
+/* Разделы */
+section {
+  padding: 20px 40px;
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  display: none;
+}
+
+section.active {
+  display: block;
+}
+
+/* Журнал проекта */
+.post {
+  background-color: #e9ebee;
+  padding: 12px 16px;
+  margin-top: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccd0d5;
+}
+
+/* Ссылки на ресурсы */
+.resource-link {
+  color: #1877f2;
+  text-decoration: none;
+}
+
+.resource-link:hover {
+  text-decoration: underline;
+}
