@@ -6,24 +6,30 @@
 
 ```plaintext
 /
-├── README.md
+├── SiteBasePart_PD
+│   ├── main_base.html
+│   └── style.css
 ├── docs/
-│   ├── README.md
-│   ├── practice_documentation.md
+│   ├── README.md  
 │   └── ...
 ├── reports/
 │   ├── README.md
 │   ├── report.pdf
 │   └── ...
 ├── site/
-│   ├── index.html
-│   ├── css/
-│   │   └── style.css
-│   └── images/
-│       └── logo.png
-├── src/
-│   ├── main.py
-│   └── ...
+│   ├── JEST_CTF
+│      ├── auth-buster.html
+│      ├── csrf-trap.html
+│      ├── file-hunter.html
+│      ├── flag-checker.html
+│      ├── idor-leak.html
+│      ├── index.html
+│      ├── practice-report.html
+│      ├── scripts.js
+│      ├── sql-injector.html
+│      ├── styles.css
+│      └──xss-playground.html
+│       
 ├── task/
 │   ├── README.md
 │   └── report_template.md
